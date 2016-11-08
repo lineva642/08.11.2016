@@ -52,7 +52,6 @@ class ball():
 
         self.set_coords()
 
-        self.set_coords()
 
 
     def hittest(self,ob):
@@ -153,6 +152,7 @@ class target():
 
 
 t1 = target()
+t2 = target()
 screen1 = canv.create_text(400,300, text = '',font = '28')
 g1 = gun()
 bullet = 0
@@ -163,24 +163,35 @@ balls = []
 def new_game(event=''):
     global gun, t1, screen1, balls, bullet
     t1.new_target()
+    t2.new_target()
     bullet = 0
     balls = []
     canv.bind('<Button-1>', g1.fire2_start)
     canv.bind('<ButtonRelease-1>', g1.fire2_end)
     canv.bind('<Motion>', g1.targetting)
 
+    p=0
     z = 0.03
     t1.live = 1
-    while t1.live or balls:
+    while (t1.live and t2.live) or balls:
         t1.target_move()
+        t2.target_move()
         for b in balls:
             b.move()
             if b.hittest(t1) and t1.live:
                 t1.live = 0
                 t1.hit()
+                canv.itemconfig(screen1, text = 'Вы уничтожили цель 1 за ' + str(bullet) + ' выстрелов')
+                p=p+1
+            if b.hittest(t2) and t2.live:
+                t2.live = 0
+                t2.hit()
+                canv.itemconfig(screen1, text = 'Вы уничтожили цель 2 за ' + str(bullet) + ' выстрелов')
+                p=p+1
+            if p==2:
                 canv.bind('<Button-1>', '')
                 canv.bind('<ButtonRelease-1>', '')
-                canv.itemconfig(screen1, text = 'Вы уничтожили цель за ' + str(bullet) + ' выстрелов')
+                new_game()
         canv.update()
         time.sleep(0.03)
         g1.targetting()
@@ -191,4 +202,3 @@ def new_game(event=''):
 
 new_game()
 
-mainloop()
