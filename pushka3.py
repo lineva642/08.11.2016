@@ -45,24 +45,12 @@ class ball():
 
         self.vy -= 1.5
 
-        if self.x >= 790:
-            self.x = 790
-            self.vx = -self.vx * 0.7
-        if self.y >= 550:
-            self.y = 550
-            self.vy = -self.vy*0.7
-            self.vx = self.vx*0.5
-            if self.vy < 8:
-                self.y = 550
-                self.vy = 0
-        if self.x <= 10:
-            self.x = 10
-            self.vx = -self.vx * 0.7
-        if self.y <= 10:
-            self.y = 10
-            self.vy = -self.vy*0.7
-            self.vx = self.vx*0.5
+        if self.y <=0 or self.y >=550:
+            self.vy *= -1
+        if self.x >= 790 or self.x<=0:
+            self.vx *= -1
 
+        self.set_coords()
 
         self.set_coords()
 
