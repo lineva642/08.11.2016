@@ -12,6 +12,5 @@ class Vector:
 a = Vector(2, 5)
 b = Vector(3, 4)
 
-print(str(a))
 print(str(a+b))
 print(str(a-b))
