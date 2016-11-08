@@ -161,7 +161,7 @@ balls = []
 
 
 def new_game(event=''):
-    global gun, t1, screen1, balls, bullet
+    global gun, t1,t2, screen1, balls, bullet
     t1.new_target()
     t2.new_target()
     bullet = 0
