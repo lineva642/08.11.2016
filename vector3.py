@@ -16,12 +16,6 @@ m=0
 im=0
 for i in range(n):
     a.append(Vector(input()))
-    if float(abs(a[i])) > m:
-        m=abs(a[i])
-        im=i
-print('Наибольшее расстояние:',a[im])
-
-
 def cm(a):
     sum=Vector('0,0')
     for k in a:
